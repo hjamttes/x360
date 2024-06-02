@@ -10,10 +10,6 @@ emulator.loadGame('game.xex');
 // Run the emulator
 emulator.run();
 
-// Configure privileged ports to start at port 999
-sudo sysctl net.ipv4.ip_unprivileged_port_start=999
-echo 'ysctl net.ipv4.ip_unprivileged_port_start=999' | sudo tee /etc/sysctl.d/99-xenia.conf
-
 // Create a Web Audio context
 const audioContext = new AudioContext();
 
@@ -51,16 +47,3 @@ gamepad.addEventListener('buttondown', (event) => {
 gamepad.addEventListener('axischange', (event) => {
   // Handle axis change
 });
-
-// Configure Xenia Web Services
-const apiAddress = "https://xenia-netplay-2a0298c0e3f4.herokuapp.com";
-const upnp = true;
-
-// Create a TOML configuration file
-const config = `
-api_address = "${apiAddress}"
-upnp = ${upnp}
-`;
-
-// Save the configuration file
-fs.writeFileSync('xenia-config.toml', config);
